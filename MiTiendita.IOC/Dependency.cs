@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MiTiendaBackend.DAL.Repository;
+using MiTiendaBackend.DAL.Repository.Contract;
 using MiTiendita.DAL.DBContext;
 using System;
 using System.Collections.Generic;
@@ -18,6 +20,8 @@ namespace MiTiendita.IOC
       {
         opt.UseSqlServer(config.GetConnectionString("sqlString"));
       });
+
+      services.AddTransient(typeof(GenericRepository<>));
     }
   }
 }
