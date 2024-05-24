@@ -6,4 +6,8 @@
     <Nullable>enable</Nullable>
   </PropertyGroup>
 
+  <ItemGroup>
+    <ProjectReference Include="..\MiTiendita.Entity\MiTiendita.Entity.csproj" />
+  </ItemGroup>
+
 </Project>
