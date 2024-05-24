@@ -1,0 +1,6 @@
+@MiTienditaBackend.API_HostAddress = http://localhost:5271
+
+GET {{MiTienditaBackend.API_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
