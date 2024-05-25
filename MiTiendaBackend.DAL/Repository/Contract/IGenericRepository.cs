@@ -14,5 +14,6 @@ namespace MiTiendaBackend.DAL.Repository.Contract
     bool Update(T model);
     bool Delete(T model);
     IQueryable<T> Query(Expression<Func<T, bool>> filter);
+    int Count();
   }
 }

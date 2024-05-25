@@ -7,6 +7,12 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="AutoMapper" Version="13.0.1" />
+    <PackageReference Include="System.IdentityModel.Tokens.Jwt" Version="7.5.2" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\MiTiendita.DTO\MiTiendaBackend.DTO.csproj" />
     <ProjectReference Include="..\MiTiendita.Entity\MiTiendaBackend.Entity.csproj" />
   </ItemGroup>
 

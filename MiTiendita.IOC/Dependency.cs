@@ -1,9 +1,12 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
+using MiTiendaBackend.DAL.DBContext;
 using MiTiendaBackend.DAL.Repository;
 using MiTiendaBackend.DAL.Repository.Contract;
-using MiTiendita.DAL.DBContext;
+using MiTiendita.BLL.Services;
+using MiTiendita.BLL.Services.Contract;
+using MiTiendita.Utility;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -21,7 +24,13 @@ namespace MiTiendita.IOC
         opt.UseSqlServer(config.GetConnectionString("sqlString"));
       });
 
-      services.AddTransient(typeof(GenericRepository<>));
+      services.AddTransient(typeof(IGenericRepository<>), typeof(GenericRepository<>));
+
+      services.AddAutoMapper(typeof(AutoMapperProfile));
+
+      services.AddScoped<IAppService, AppService>();
+      services.AddScoped<IAdminService, AdminService>();
+      //services.AddScoped<IStoreService, StoreService>();
     }
   }
 }

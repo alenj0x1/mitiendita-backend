@@ -1,5 +1,5 @@
-﻿using MiTiendaBackend.DAL.Repository.Contract;
-using MiTiendita.DAL.DBContext;
+﻿using MiTiendaBackend.DAL.DBContext;
+using MiTiendaBackend.DAL.Repository.Contract;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -77,6 +77,18 @@ namespace MiTiendaBackend.DAL.Repository
         _dbContext.SaveChangesAsync();
 
         return true;
+      }
+      catch (Exception)
+      {
+        throw;
+      }
+    }
+
+    public int Count()
+    {
+      try
+      {
+        return _dbContext.Set<T>().Count();
       }
       catch (Exception)
       {

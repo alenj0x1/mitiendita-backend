@@ -8,6 +8,8 @@
 
   <ItemGroup>
     <ProjectReference Include="..\MiTiendaBackend.DAL\MiTiendaBackend.DAL.csproj" />
+    <ProjectReference Include="..\MiTiendita.BLL\MiTiendaBackend.BLL.csproj" />
+    <ProjectReference Include="..\MiTiendita.Utility\MiTiendaBackend.Utility.csproj" />
   </ItemGroup>
 
 </Project>

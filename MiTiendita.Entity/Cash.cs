@@ -11,7 +11,7 @@ public partial class Cash
 
     public int StoreId { get; set; }
 
-    public virtual ICollection<Cashier> Cashiers { get; set; } = new List<Cashier>();
-
     public virtual Store Store { get; set; } = null!;
+
+    public virtual ICollection<User> Users { get; set; } = new List<User>();
 }
