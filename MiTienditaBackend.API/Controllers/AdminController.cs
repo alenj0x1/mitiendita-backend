@@ -122,7 +122,7 @@ namespace MiTienditaBackend.API.Controllers
       {
         bool DeletedAdmin = await _adminService.DeleteAdmin(model);
 
-        if (DeletedAdmin)
+        if (!DeletedAdmin)
         {
           throw new TaskCanceledException("admin_delete_failed");
         }
