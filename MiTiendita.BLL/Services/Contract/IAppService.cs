@@ -8,6 +8,6 @@ namespace MiTiendita.BLL.Services.Contract
 {
   public interface IAppService
   {
-    bool CheckAdmin();
+    Task<bool> CheckAdmin();
   }
 }

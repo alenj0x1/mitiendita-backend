@@ -54,13 +54,13 @@ namespace MiTienditaBackend.API.Controllers
 
     [HttpPost]
     [Route("create")]
-    public IActionResult CreateAdmin([FromBody] CreateAdminRequesrtDTO model)
+    public async Task<IActionResult> CreateAdmin([FromBody] CreateAdminRequesrtDTO model)
     {
       GenericResponse<AdminDTO> rsp = new();
 
       try
       {
-        AdminDTO? CreatedAdmin = _adminService.CreateAdmin(model);
+        AdminDTO? CreatedAdmin = await _adminService.CreateAdmin(model);
 
         if (CreatedAdmin == null)
         {
@@ -84,13 +84,13 @@ namespace MiTienditaBackend.API.Controllers
 
     [HttpPut]
     [Route("update")]
-    public IActionResult UpdateAdmin([FromBody] UpdateAdminRequestDTO model)
+    public async Task<IActionResult> UpdateAdmin([FromBody] UpdateAdminRequestDTO model)
     {
       GenericResponse<AdminDTO> rsp = new();
 
       try
       {
-        AdminDTO? UpdatedAdmin = _adminService.UpdateAdmin(model);
+        AdminDTO? UpdatedAdmin = await _adminService.UpdateAdmin(model);
 
         if (UpdatedAdmin == null)
         {
@@ -114,13 +114,13 @@ namespace MiTienditaBackend.API.Controllers
 
     [HttpDelete]
     [Route("delete")]
-    public IActionResult DeleteAdmin([FromBody] DeleteAdminRequestDTO model)
+    public async Task<IActionResult> DeleteAdmin([FromBody] DeleteAdminRequestDTO model)
     {
       GenericResponse<bool> rsp = new();
 
       try
       {
-        bool DeletedAdmin = _adminService.DeleteAdmin(model);
+        bool DeletedAdmin = await _adminService.DeleteAdmin(model);
 
         if (DeletedAdmin)
         {

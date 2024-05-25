@@ -10,10 +10,10 @@ namespace MiTiendaBackend.DAL.Repository.Contract
   public interface IGenericRepository<T> where T : class
   {
     T? Get(Expression<Func<T, bool>> filter);
-    T Create(T model);
-    bool Update(T model);
-    bool Delete(T model);
+    Task<T> Create(T model);
+    Task<bool> Update(T model);
+    Task<bool> Delete(T model);
     IQueryable<T> Query(Expression<Func<T, bool>> filter);
-    int Count();
+    Task<int> Count();
   }
 }

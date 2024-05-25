@@ -12,8 +12,8 @@ namespace MiTiendita.BLL.Services.Contract
   public interface IAdminService
   {
     User? GetAdmin(int adminId);
-    AdminDTO CreateAdmin(CreateAdminRequesrtDTO model);
-    AdminDTO UpdateAdmin(UpdateAdminRequestDTO model);
-    bool DeleteAdmin(DeleteAdminRequestDTO model);
+    Task<AdminDTO> CreateAdmin(CreateAdminRequesrtDTO model);
+    Task<AdminDTO> UpdateAdmin(UpdateAdminRequestDTO model);
+    Task<bool> DeleteAdmin(DeleteAdminRequestDTO model);
   }
 }

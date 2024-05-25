@@ -17,12 +17,7 @@ namespace MiTiendita.BLL.Services
     private readonly IGenericRepository<Store> _storeRep;
     private readonly IMapper _mapper;
 
-    public StoreService(IMapper mapper)
-    {
-      _mapper = mapper;
-    }
-
-    public StoreDTO CreateStore(CreateStoreRequestDTO model)
+    public async Task<StoreDTO> CreateStore(CreateStoreRequestDTO model)
     {
       try
       {
@@ -33,7 +28,7 @@ namespace MiTiendita.BLL.Services
           throw new TaskCanceledException("store_name_taked");
         }
 
-        Store? NewStore = _storeRep.Create(_mapper.Map<Store>(model));
+        Store? NewStore = await _storeRep.Create(_mapper.Map<Store>(model));
 
         return _mapper.Map<StoreDTO>(NewStore);
       }
@@ -43,7 +38,7 @@ namespace MiTiendita.BLL.Services
       }
     }
 
-    public bool DeleteStore(int storeId)
+    public async Task<bool> DeleteStore(int storeId)
     {
       try
       {
@@ -54,7 +49,7 @@ namespace MiTiendita.BLL.Services
           throw new TaskCanceledException("store_not_found");
         }
 
-        _storeRep.Delete(FindStore);
+        await _storeRep.Delete(FindStore);
 
         return true;
       }
@@ -83,7 +78,7 @@ namespace MiTiendita.BLL.Services
       }
     }
 
-    public StoreDTO UpdateStore(UpdateStoreRequestDTO model)
+    public async Task<StoreDTO> UpdateStore(UpdateStoreRequestDTO model)
     {
       try
       {
@@ -94,7 +89,7 @@ namespace MiTiendita.BLL.Services
           throw new TaskCanceledException("store_not_found");
         }
 
-        _storeRep.Update(FindStore);
+        await _storeRep.Update(FindStore);
 
         StoreDTO UpdatedStore = GetStore(model.StoreId);
 

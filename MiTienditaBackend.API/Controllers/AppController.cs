@@ -17,13 +17,13 @@ namespace MiTienditaBackend.API.Controllers
     }
 
     [HttpGet]
-    public IActionResult CheckApp()
+    public async Task<IActionResult> CheckApp()
     {
       GenericResponse<bool> rsp = new();
 
       try
       {
-        bool CheckAdmin = _appService.CheckAdmin();
+        bool CheckAdmin = await _appService.CheckAdmin();
 
         if (!CheckAdmin)
         {

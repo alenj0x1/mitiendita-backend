@@ -10,9 +10,9 @@ namespace MiTiendita.BLL.Services.Contract
 {
   public interface IStoreService
   {
-    StoreDTO CreateStore(CreateStoreRequestDTO model);
+    Task<StoreDTO> CreateStore(CreateStoreRequestDTO model);
     StoreDTO GetStore(int storeId);
-    StoreDTO UpdateStore(UpdateStoreRequestDTO model);
-    bool DeleteStore(int storeId);
+    Task<StoreDTO> UpdateStore(UpdateStoreRequestDTO model);
+    Task<bool> DeleteStore(int storeId);
   }
 }

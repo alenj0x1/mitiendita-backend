@@ -18,11 +18,11 @@ namespace MiTiendita.BLL.Services
       _adminRep = adminRep;
     }
 
-    public bool CheckAdmin()
+    public async Task<bool> CheckAdmin()
     {
       try
       {
-        int AdminCount = _adminRep.Count();
+        int AdminCount = await _adminRep.Count();
 
         if (AdminCount == 0)
         {

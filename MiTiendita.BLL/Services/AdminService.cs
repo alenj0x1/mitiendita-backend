@@ -25,14 +25,14 @@ namespace MiTiendita.BLL.Services
       _mapper = mapper;
     }
 
-    private bool CheckSuperAdmin(string? superAdminPassword)
+    private async Task<bool> CheckSuperAdmin(string? superAdminPassword)
     {
       // Without admins
-      if (_userRep.Count() == 0)
+      if (await _userRep.Count() == 0)
         return true;
 
       // Admind needed
-      if (_userRep.Count() > 0 && superAdminPassword == null)
+      if (await _userRep.Count() > 0 && superAdminPassword == null)
         return false;
 
       User? SuperAdmin = _userRep.Get(admin => admin.UserRole == 1);
@@ -60,11 +60,11 @@ namespace MiTiendita.BLL.Services
       }
     }
 
-    public AdminDTO CreateAdmin(CreateAdminRequesrtDTO model)
+    public async Task<AdminDTO> CreateAdmin(CreateAdminRequesrtDTO model)
     {
       try
       {
-        bool SuperAdminCheck =  CheckSuperAdmin(model.SuperAdminPassword);
+        bool SuperAdminCheck = await CheckSuperAdmin(model.SuperAdminPassword);
 
         if (!SuperAdminCheck)
         {
@@ -84,7 +84,7 @@ namespace MiTiendita.BLL.Services
         NewAdmin.Password = _passwordHasher.Hash(model.Password);
         NewAdmin.PasswordHint = model.PasswordHint;
 
-        if (SuperAdminCheck && _userRep.Count() == 0)
+        if (SuperAdminCheck && await _userRep.Count() == 0)
         {
           NewAdmin.UserRole = 1;
         }
@@ -93,7 +93,7 @@ namespace MiTiendita.BLL.Services
           NewAdmin.UserRole = 2;
         }
 
-        User CreatedAdmin = _userRep.Create(_mapper.Map<User>(NewAdmin));
+        User CreatedAdmin = await _userRep.Create(_mapper.Map<User>(NewAdmin));
        
         return _mapper.Map<AdminDTO>(CreatedAdmin);
       }
@@ -103,11 +103,11 @@ namespace MiTiendita.BLL.Services
       }
     }
 
-    public AdminDTO UpdateAdmin(UpdateAdminRequestDTO model)
+    public async Task<AdminDTO> UpdateAdmin(UpdateAdminRequestDTO model)
     {
       try
       {
-        bool SuperAdminCheck = CheckSuperAdmin(model.SuperAdminPassword);
+        bool SuperAdminCheck = await CheckSuperAdmin(model.SuperAdminPassword);
 
         if (!SuperAdminCheck)
         {
@@ -121,15 +121,13 @@ namespace MiTiendita.BLL.Services
           throw new TaskCanceledException("admin_incorrect_id");
         }
 
-        model.Mail = model.Mail != null ? model.Mail : FindAdmin.Mail;
-        model.Password = model.Password != null ? _passwordHasher.Hash(model.Password) : FindAdmin.Password;
-        model.PasswordHint = model.PasswordHint != null ? model.PasswordHint : FindAdmin.PasswordHint;
+        FindAdmin.Mail = model.Mail != null ? model.Mail : FindAdmin.Mail;
+        FindAdmin.Password = model.Password != null ? _passwordHasher.Hash(model.Password) : FindAdmin.Password;
+        FindAdmin.PasswordHint = model.PasswordHint != null ? model.PasswordHint : FindAdmin.PasswordHint;
 
-        _userRep.Update(_mapper.Map<User>(model));
+        await _userRep.Update(FindAdmin);
 
-        User? UpdatedAdmin = GetAdmin(model.AdminId);
-
-        return _mapper.Map<AdminDTO>(UpdatedAdmin);
+        return _mapper.Map<AdminDTO>(FindAdmin);
       }
       catch (Exception)
       {
@@ -137,11 +135,11 @@ namespace MiTiendita.BLL.Services
       }
     }
 
-    public bool DeleteAdmin(DeleteAdminRequestDTO model)
+    public async Task<bool> DeleteAdmin(DeleteAdminRequestDTO model)
     {
       try
       {
-        bool SuperAdminCheck = CheckSuperAdmin(model.SuperAdminPassword);
+        bool SuperAdminCheck = await CheckSuperAdmin(model.SuperAdminPassword);
 
         if (!SuperAdminCheck)
         {
@@ -155,7 +153,7 @@ namespace MiTiendita.BLL.Services
           throw new TaskCanceledException("admin_incorrect_id");
         }
 
-        return _userRep.Delete(FindAdmin);
+        return await _userRep.Delete(FindAdmin);
       }
       catch (Exception)
       {

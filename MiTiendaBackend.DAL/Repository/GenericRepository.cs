@@ -1,4 +1,5 @@
-﻿using MiTiendaBackend.DAL.DBContext;
+﻿using Microsoft.EntityFrameworkCore;
+using MiTiendaBackend.DAL.DBContext;
 using MiTiendaBackend.DAL.Repository.Contract;
 using System;
 using System.Collections.Generic;
@@ -18,12 +19,12 @@ namespace MiTiendaBackend.DAL.Repository
       this._dbContext = dbContext;
     }
 
-    public T Create(T model)
+    public async Task<T> Create(T model)
     {
       try
       {
         _dbContext.Set<T>().Add(model);
-        _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
 
         return model;
       }
@@ -33,12 +34,12 @@ namespace MiTiendaBackend.DAL.Repository
       }
     }
 
-    public bool Delete(T model)
+    public async Task<bool> Delete(T model)
     {
       try
       {
         _dbContext.Set<T>().Remove(model);
-        _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
 
         return true;
       }
@@ -69,12 +70,12 @@ namespace MiTiendaBackend.DAL.Repository
       }
     }
 
-    public bool Update(T model)
+    public async Task<bool> Update(T model)
     {
       try
       {
         _dbContext.Set<T>().Update(model);
-        _dbContext.SaveChangesAsync();
+        await _dbContext.SaveChangesAsync();
 
         return true;
       }
@@ -84,11 +85,11 @@ namespace MiTiendaBackend.DAL.Repository
       }
     }
 
-    public int Count()
+    public async Task<int> Count()
     {
       try
       {
-        return _dbContext.Set<T>().Count();
+        return await _dbContext.Set<T>().CountAsync();
       }
       catch (Exception)
       {
