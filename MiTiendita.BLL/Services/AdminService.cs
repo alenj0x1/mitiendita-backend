@@ -107,13 +107,6 @@ namespace MiTiendita.BLL.Services
     {
       try
       {
-        bool SuperAdminCheck = await CheckSuperAdmin(model.SuperAdminPassword);
-
-        if (!SuperAdminCheck)
-        {
-          throw new TaskCanceledException("admin_superadmin_incorrect_credentials");
-        }
-
         User? FindAdmin = _userRep.Get(admin => admin.UserId == model.AdminId);
 
         if (FindAdmin == null)
@@ -135,18 +128,11 @@ namespace MiTiendita.BLL.Services
       }
     }
 
-    public async Task<bool> DeleteAdmin(DeleteAdminRequestDTO model)
+    public async Task<bool> DeleteAdmin(int adminId)
     {
       try
       {
-        bool SuperAdminCheck = await CheckSuperAdmin(model.SuperAdminPassword);
-
-        if (!SuperAdminCheck)
-        {
-          throw new TaskCanceledException("admin_superadmin_incorrect_credentials");
-        }
-
-        User? FindAdmin = GetAdmin(model.AdminId);
+        User? FindAdmin = GetAdmin(adminId);
 
         if (FindAdmin == null)
         {

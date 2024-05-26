@@ -8,7 +8,6 @@ namespace MiTiendita.DTO.Requests
 {
   public class UpdateAdminRequestDTO
   {
-    public string SuperAdminPassword { get; set; }
     public int AdminId { get; set; }
     public string? Mail { get; set; }
 

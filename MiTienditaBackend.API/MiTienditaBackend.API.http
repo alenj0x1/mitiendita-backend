@@ -1,6 +1,39 @@
-@MiTienditaBackend.API_HostAddress = http://localhost:5271
+@MiTienditaBackend.API_HostAddress = http://localhost:5271/api
+@Token= Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJuYW1laWQiOiI0Iiwicm9sZSI6InN1cGVyYWRtaW4iLCJuYmYiOjE3MTY2ODE4NjMsImV4cCI6MTcxNjc2ODI2MywiaWF0IjoxNzE2NjgxODYzfQ.FlHBg4-Qp8Pvxns8bTqcAV5tTwFJ4FrFJ5NCj-0xRMI
 
-GET {{MiTienditaBackend.API_HostAddress}}/weatherforecast/
-Accept: application/json
+POST {{MiTienditaBackend.API_HostAddress}}/app/login
+Content-Type: application/json
 
+{
+  "mail": "superadmin@mitiendita.com",
+  "password": "1234"
+}
 ###
+
+GET {{MiTienditaBackend.API_HostAddress}}/admin/5
+Authorization: {{Token}}
+###
+
+POST {{MiTienditaBackend.API_HostAddress}}/admin/create
+Content-Type: application/json
+
+{
+  "superAdminPassword": "1234",
+  "mail": "admin@mitiendita.com",
+  "password": "1234",
+  "passwordHint": "string"
+}
+###
+
+PUT {{MiTienditaBackend.API_HostAddress}}/admin/update
+Content-Type: application/json
+Authorization: {{Token}}
+
+{
+  "adminId": 6,
+  "mail": "adminupdated@mitiendita.com"
+}
+###
+
+DELETE {{MiTienditaBackend.API_HostAddress}}/admin/delete/5
+Authorization: {{Token}}

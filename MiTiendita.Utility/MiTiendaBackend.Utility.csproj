@@ -12,6 +12,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\MiTiendaBackend.DAL\MiTiendaBackend.DAL.csproj" />
     <ProjectReference Include="..\MiTiendita.DTO\MiTiendaBackend.DTO.csproj" />
     <ProjectReference Include="..\MiTiendita.Entity\MiTiendaBackend.Entity.csproj" />
   </ItemGroup>

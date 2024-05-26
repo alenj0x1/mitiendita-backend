@@ -1,5 +1,6 @@
 ﻿using Microsoft.Extensions.Configuration;
 using Microsoft.IdentityModel.Tokens;
+using MiTiendaBackend.DAL.Repository.Contract;
 using MiTiendita.Entity;
 using System;
 using System.Collections.Generic;
@@ -12,8 +13,8 @@ using System.Threading.Tasks;
 namespace MiTiendita.Utility
 {
   public class ManageToken
-  {
-    public string CreateToken(IConfiguration config, User model)
+  { 
+    public string CreateToken(IConfiguration config, IGenericRepository<AppRole> appRole, User user)
     {
       var key = config.GetSection("JWTSettings:key").Value;
       var keyBytes = Encoding.ASCII.GetBytes(key);
@@ -25,8 +26,10 @@ namespace MiTiendita.Utility
 
       var claims = new ClaimsIdentity();
 
-      claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, Convert.ToString(model.UserId)));
-      claims.AddClaim(new Claim(ClaimTypes.Role, Convert.ToString(model.UserRole)));
+      AppRole UserRole = appRole.Get(appr => appr.RoleId == user.UserRole);
+
+      claims.AddClaim(new Claim(ClaimTypes.NameIdentifier, Convert.ToString(user.UserId)));
+      claims.AddClaim(new Claim(ClaimTypes.Role, Convert.ToString(UserRole.Name)));
 
       var tokenDescriptor = new SecurityTokenDescriptor
       {

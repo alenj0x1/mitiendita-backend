@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MiTiendita.BLL.Services.Contract;
@@ -22,6 +23,8 @@ namespace MiTienditaBackend.API.Controllers
       _mapper = mapper;
     }
 
+    // SuperAdmin
+    [Authorize(Roles = "superadmin")]
     [HttpGet]
     [Route("{adminId}")]
     public IActionResult GetAdmin(int adminId)
@@ -82,6 +85,8 @@ namespace MiTienditaBackend.API.Controllers
       }
     }
 
+    // SuperAdmin
+    [Authorize(Roles = "superadmin")]
     [HttpPut]
     [Route("update")]
     public async Task<IActionResult> UpdateAdmin([FromBody] UpdateAdminRequestDTO model)
@@ -112,15 +117,17 @@ namespace MiTienditaBackend.API.Controllers
       }
     }
 
+    // SuperAdmin
+    [Authorize(Roles = "superadmin")]
     [HttpDelete]
-    [Route("delete")]
-    public async Task<IActionResult> DeleteAdmin([FromBody] DeleteAdminRequestDTO model)
+    [Route("delete/{adminId}")]
+    public async Task<IActionResult> DeleteAdmin(int adminId)
     {
       GenericResponse<bool> rsp = new();
 
       try
       {
-        bool DeletedAdmin = await _adminService.DeleteAdmin(model);
+        bool DeletedAdmin = await _adminService.DeleteAdmin(adminId);
 
         if (!DeletedAdmin)
         {

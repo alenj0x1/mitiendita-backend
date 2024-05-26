@@ -14,6 +14,6 @@ namespace MiTiendita.BLL.Services.Contract
     User? GetAdmin(int adminId);
     Task<AdminDTO> CreateAdmin(CreateAdminRequesrtDTO model);
     Task<AdminDTO> UpdateAdmin(UpdateAdminRequestDTO model);
-    Task<bool> DeleteAdmin(DeleteAdminRequestDTO model);
+    Task<bool> DeleteAdmin(int adminId);
   }
 }
