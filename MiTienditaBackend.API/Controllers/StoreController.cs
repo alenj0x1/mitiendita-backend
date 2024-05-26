@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MiTiendita.DTO.Requests;
+using MiTienditaBackend.DTO.Requests.Store;
+using MiTienditaBackend.BLL.Services.Contract;
 
 namespace MiTienditaBackend.API.Controllers
 {
@@ -8,6 +9,13 @@ namespace MiTienditaBackend.API.Controllers
   [ApiController]
   public class StoreController : ControllerBase
   {
+    private readonly IStoreService _storeService;
+
+    public StoreController(IStoreService storeService)
+    {
+      _storeService = storeService;
+    }
+
     [HttpGet]
     [Route("{storeId}")]
     public ActionResult GetStore(int storeId)
@@ -19,6 +27,8 @@ namespace MiTienditaBackend.API.Controllers
     [Route("create")]
     public ActionResult CreateStore([FromBody] CreateStoreRequestDTO model)
     {
+      _storeService.CreateStore(model);
+
       return Ok();
     }
 

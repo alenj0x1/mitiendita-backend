@@ -1,12 +1,12 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MiTiendaBackend.DTO.Requests;
-using MiTiendita.BLL.Services.Contract;
-using MiTiendita.Utility;
+using MiTienditaBackend.BLL.Services.Contract;
+using MiTienditaBackend.DTO.Requests.App;
+using MiTienditaBackend.Utility;
 
 namespace MiTienditaBackend.API.Controllers
 {
-  [Route("api/[controller]")]
+    [Route("api/[controller]")]
   [ApiController]
   public class AppController : ControllerBase
   {
@@ -18,18 +18,16 @@ namespace MiTienditaBackend.API.Controllers
     }
 
     [HttpGet]
-    public async Task<IActionResult> CheckApp()
+    public IActionResult CheckApp()
     {
       GenericResponse<bool> rsp = new();
 
       try
       {
-        bool CheckAdmin = await _appService.CheckAdmin();
+        int CheckSuperAdmin = _appService.CheckSuperAdmin();
 
-        if (!CheckAdmin)
-        {
+        if (CheckSuperAdmin == 0)
           throw new TaskCanceledException("without_admin");
-        }
 
         rsp.Result = true;
         rsp.Data = true;

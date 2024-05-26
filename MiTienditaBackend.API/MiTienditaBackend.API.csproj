@@ -1,4 +1,4 @@
-<Project Sdk="Microsoft.NET.Sdk.Web">
+﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup>
     <TargetFramework>net8.0</TargetFramework>
@@ -12,9 +12,9 @@
   </ItemGroup>
 
   <ItemGroup>
-    <ProjectReference Include="..\MiTiendita.BLL\MiTiendaBackend.BLL.csproj" />
-    <ProjectReference Include="..\MiTiendita.IOC\MiTiendaBackend.IOC.csproj" />
-    <ProjectReference Include="..\MiTiendita.Utility\MiTiendaBackend.Utility.csproj" />
+    <ProjectReference Include="..\MiTienditaBackend.BLL\MiTienditaBackend.BLL.csproj" />
+    <ProjectReference Include="..\MiTienditaBackend.IOC\MiTienditaBackend.IOC.csproj" />
+    <ProjectReference Include="..\MiTienditaBackend.Utility\MiTienditaBackend.Utility.csproj" />
   </ItemGroup>
 
 </Project>

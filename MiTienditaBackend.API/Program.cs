@@ -1,6 +1,6 @@
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.IdentityModel.Tokens;
-using MiTiendita.IOC;
+using MiTienditaBackend.IOC;
 using System.Text;
 
 var builder = WebApplication.CreateBuilder(args);

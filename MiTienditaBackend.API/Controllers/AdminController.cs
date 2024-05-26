@@ -2,15 +2,15 @@
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using MiTiendita.BLL.Services.Contract;
-using MiTiendita.DTO;
-using MiTiendita.DTO.Requests;
-using MiTiendita.Entity;
-using MiTiendita.Utility;
+using MiTienditaBackend.DTO.Requests.Admin;
+using MiTienditaBackend.BLL.Services.Contract;
+using MiTienditaBackend.DTO;
+using MiTienditaBackend.Entity;
+using MiTienditaBackend.Utility;
 
 namespace MiTienditaBackend.API.Controllers
 {
-  [Route("api/[controller]")]
+    [Route("api/[controller]")]
   [ApiController]
   public class AdminController : ControllerBase
   {
